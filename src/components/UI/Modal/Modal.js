@@ -1,0 +1,43 @@
+import React, { Component } from "react";
+
+import modalStyles from "./Modal.css";
+import Aux from "../../../hoc/Auxiliary/Auxiliary";
+import Backdrop from "../Backdrop/Backdrop";
+
+class Modal extends Component {
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log("[modal] shouldComponentUpdate");
+    // !!! only if displayModal changes the modal and his children will update
+    // this way the app doesn't renderer the modal and its children unnecessary !!!
+    // Because we don't need to check all modal properties we don't use pure component
+    return nextProps.displayModal !== this.props.displayModal;
+  }
+
+  componentDidUpdate(nextProps, nextState) {
+    console.log("[modal] componentDidUpdate");
+  }
+
+  render() {
+    return (
+      <Aux>
+        <Backdrop
+          showBackdrop={this.props.displayModal}
+          clicked={this.props.closeModal}
+        />
+        <div
+          className={modalStyles.Modal}
+          style={{
+            transform: this.props.displayModal
+              ? "translateY(0)"
+              : "translateY(-100vh)",
+            opacity: this.props.displayModal ? "1" : "0",
+          }}
+        >
+          {this.props.children}
+        </div>
+      </Aux>
+    );
+  }
+}
+
+export default Modal;

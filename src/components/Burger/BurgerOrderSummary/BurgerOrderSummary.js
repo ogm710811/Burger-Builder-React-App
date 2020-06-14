@@ -29,11 +29,11 @@ class BurgerOrderSummary extends Component {
           <strong>Total Price: ${this.props.totalPrice.toFixed(2)}</strong>
         </p>
         <p>Continue to Checkout?</p>
-        <Button btnType="Success" clicked={this.props.clickedContinue}>
-          Order
-        </Button>
         <Button btnType="Danger" clicked={this.props.clickedCancel}>
           Cancel
+        </Button>
+        <Button btnType="Success" clicked={this.props.clickedContinue}>
+          Checkout
         </Button>
       </Aux>
     );

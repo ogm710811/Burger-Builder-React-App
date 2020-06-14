@@ -3,7 +3,6 @@ import React from "react";
 import navigationItemStyles from "./NavigationItem.css";
 
 const navigationItem = (props) => {
-  console.log("props::::", props);
   return (
     <li className={navigationItemStyles.NavigationItem}>
       <a

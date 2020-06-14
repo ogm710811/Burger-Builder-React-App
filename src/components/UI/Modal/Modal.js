@@ -10,7 +10,10 @@ class Modal extends Component {
     // !!! only if displayModal changes the modal and his children will update
     // this way the app doesn't renderer the modal and its children unnecessary !!!
     // Because we don't need to check all modal properties we don't use pure component
-    return nextProps.displayModal !== this.props.displayModal;
+    return (
+      nextProps.displayModal !== this.props.displayModal ||
+      nextProps.children !== this.props.children
+    );
   }
 
   componentDidUpdate(nextProps, nextState) {
@@ -18,6 +21,10 @@ class Modal extends Component {
   }
 
   render() {
+    const styleClasses = !this.props.hasSpinner
+      ? modalStyles.Modal
+      : modalStyles.Spinner;
+
     return (
       <Aux>
         <Backdrop
@@ -25,7 +32,7 @@ class Modal extends Component {
           clicked={this.props.closeModal}
         />
         <div
-          className={modalStyles.Modal}
+          className={styleClasses}
           style={{
             transform: this.props.displayModal
               ? "translateY(0)"
